@@ -4,11 +4,11 @@
 " Settings required for Vundle:
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " Plugins
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -24,6 +24,8 @@ Plugin 'xsbeats/vim-blade'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'cespare/vim-sbd'
 Plugin 'groenewege/vim-less'
+
+call vundle#end()
 
 filetype plugin indent on
 
