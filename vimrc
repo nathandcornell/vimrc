@@ -18,6 +18,12 @@ Plugin 'StanAngeloff/php.vim'
 Plugin 'othree/html5.vim'
 Plugin 'indenthtml.vim'
 Plugin 'joonty/vim-phpqa.git'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'xsbeats/vim-blade'
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'cespare/vim-sbd'
+Plugin 'groenewege/vim-less'
 
 filetype plugin indent on
 
@@ -54,6 +60,7 @@ endif
 " ---------------
 set ruler          " Ruler on
 set number         " Line numbers on
+set relativenumber " Relative Line numbers on
 set nowrap         " Line wrapping off
 set laststatus=2   " Always show the statusline
 set cmdheight=2    " Make the command area two lines high
@@ -97,9 +104,9 @@ set switchbuf=useopen  " Switch to an existing buffer if one exists
 " ---------------
 " Text Format
 " ---------------
-set tabstop=4
+set tabstop=2
 set backspace=indent,eol,start " Delete everything with backspace
-set shiftwidth=4 " Tabs under smart indent
+set shiftwidth=2 " Tabs under smart indent
 set cindent
 set autoindent
 set smarttab
@@ -159,7 +166,7 @@ set t_vb=
 " Mouse
 " ---------------
 set mousehide  " Hide mouse after chars typed
-set mouse=a    " Mouse in all modes
+" set mouse=a    " Mouse in all modes
 
 " Better complete options to speed it up
 set complete=.,w,b,u,U
@@ -193,6 +200,14 @@ nnoremap <silent> gj :wincmd j<CR>
 nnoremap <silent> gk :wincmd k<CR>
 nnoremap <silent> gl :wincmd l<CR>
 
+nnoremap <silent> gn :bn<CR>
+nnoremap <silent> gb :bp<CR>
+
+" paste mode shortcut
+inoremap <silent> <leader>v  <esc>:set paste!<CR> i
+nnoremap <leader>vv :set paste!<CR>
+
+
 
 " ----------------
 " Plugin settings
@@ -210,7 +225,9 @@ let g:NERDTreeMinimalUI = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")
   \&& b:NERDTreeType == "primary") | q | endif
 " Start NERDTree on startup
-autocmd VimEnter * NERDTreeTabsOpen
+if ! &diff
+  autocmd VimEnter * NERDTreeTabsOpen
+endif
 autocmd VimEnter * execute "normal \<c-w>w"
 
 " ---------------
@@ -226,3 +243,19 @@ nnoremap <leader>os :OpenSession<CR>
 let g:phpqa_codesniffer_autorun = 0
 let g:phpqa_messdetector_autorun = 0
 
+" --------------------
+" Rainbow_parentheses
+" --------------------
+autocmd VimEnter * RainbowParenthesesToggle
+autocmd Syntax * RainbowParenthesesLoadBraces
+
+" --------------------
+" DelimitMate
+" --------------------
+let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
+
+" --------------------
+" DelimitMate
+" --------------------
+nnoremap <silent> <leader>qq :Sbd<CR>

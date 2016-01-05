@@ -2,3 +2,4 @@
 /.backup/*
 /.undo/*
 /.tmp/*
+.VimballRecord
