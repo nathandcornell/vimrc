@@ -7,23 +7,26 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" Plugins
+" Plugins (Vundle must be first)
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'bling/vim-airline'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'tpope/vim-surround'
-Plugin 'ervandew/supertab'
+
+Plugin 'Raimondi/delimitMate'
 Plugin 'StanAngeloff/php.vim'
-Plugin 'othree/html5.vim'
+Plugin 'bling/vim-airline'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'cespare/vim-sbd'
+Plugin 'ervandew/supertab'
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'gregsexton/gitv'
+Plugin 'hail2u/vim-css3-syntax'
 Plugin 'indenthtml.vim'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'joonty/vim-phpqa.git'
 Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'xsbeats/vim-blade'
-Plugin 'fholgado/minibufexpl.vim'
-Plugin 'cespare/vim-sbd'
-Plugin 'groenewege/vim-less'
+Plugin 'othree/html5.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
 
 call vundle#end()
 
