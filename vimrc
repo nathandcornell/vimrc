@@ -23,7 +23,9 @@ Plugin 'indenthtml.vim'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'joonty/vim-phpqa.git'
 Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'mxw/vim-jsx'
 Plugin 'othree/html5.vim'
+Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
@@ -212,6 +214,8 @@ nnoremap <silent> gb :bp<CR>
 inoremap <silent> <leader>v  <esc>:set paste!<CR> i
 nnoremap <leader>vv :set paste!<CR>
 
+"new empty tab
+nnoremap <leader>mm :enew<CR>
 
 
 " ----------------
@@ -261,6 +265,7 @@ let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 
 " --------------------
-" DelimitMate
+" sbd
 " --------------------
 nnoremap <silent> <leader>qq :Sbd<CR>
+nnoremap <silent> <leader>QQ :Sbdm<CR>
