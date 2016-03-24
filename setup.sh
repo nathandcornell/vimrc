@@ -10,13 +10,17 @@ if [ ! -d ~/.vim/.undo ]; then
   mkdir ~/.vim/.undo
 fi
 
-if [ -d ~/.vim/bundle/Vundle.vim ]; then
-  rm -rf ~/.vim/bundle/Vundle.vim
+DEIN_INSTALL_DIR="$HOME/.vim/other/repos/github.com/Shougo/dein.vim"
+
+if [ -d "$DEIN_INSTALL_DIR" ]; then
+  rm -rf $DEIN_INSTALL_DIR
 fi
 
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+mkdir -p $DEIN_INSTALL_DIR
 
-vim +PluginInstall +qall
+git clone https://github.com/Shougo/dein.vim "$DEIN_INSTALL_DIR"
+
+vim +"call dein#install()" +qall
 
 if [ ! -f ~/.vimrc ]; then
   ln -s ~/.vim/vimrc ~/.vimrc

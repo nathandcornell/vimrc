@@ -4,34 +4,34 @@
 " Settings required for Vundle:
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+set runtimepath^=~/.vim/other/repos/github.com/Shougo/dein.vim
 
-" Plugins (Vundle must be first)
-Plugin 'VundleVim/Vundle.vim'
+call dein#begin(expand('~/.vim/other'))
 
-Plugin 'Raimondi/delimitMate'
-Plugin 'StanAngeloff/php.vim'
-Plugin 'bling/vim-airline'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'cespare/vim-sbd'
-Plugin 'ervandew/supertab'
-Plugin 'fatih/vim-go'
-Plugin 'fholgado/minibufexpl.vim'
-Plugin 'gregsexton/gitv'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'indenthtml.vim'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'joonty/vim-phpqa.git'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'mxw/vim-jsx'
-Plugin 'othree/html5.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
+call dein#add('Shougo/dein.vim')
 
-call vundle#end()
+call dein#add('Raimondi/delimitMate')
+call dein#add('StanAngeloff/php.vim')
+call dein#add('bling/vim-airline')
+call dein#add('cakebaker/scss-syntax.vim')
+call dein#add('cespare/vim-sbd')
+call dein#add('ervandew/supertab')
+call dein#add('fatih/vim-go')
+call dein#add('fholgado/minibufexpl.vim')
+call dein#add('gregsexton/gitv')
+call dein#add('hail2u/vim-css3-syntax')
+call dein#add('indenthtml.vim')
+call dein#add('jistr/vim-nerdtree-tabs')
+call dein#add('joonty/vim-phpqa.git')
+call dein#add('kien/rainbow_parentheses.vim')
+call dein#add('mxw/vim-jsx')
+call dein#add('othree/html5.vim')
+call dein#add('pangloss/vim-javascript')
+call dein#add('scrooloose/nerdtree')
+call dein#add('tpope/vim-fugitive')
+call dein#add('tpope/vim-surround')
+
+call dein#end()
 
 filetype plugin indent on
 
