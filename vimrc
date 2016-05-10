@@ -101,9 +101,10 @@ set timeoutlen=450     " Time to wait for a command (after leader for example).
 set foldlevelstart=2
 set foldmethod=indent
 set formatoptions=crql
-set iskeyword+=\$,-   " Add extra characters that are valid parts of variables
+set iskeyword+=\$,-    " Add extra characters that are valid parts of variables
 set nostartofline      " Don't go to the start of the line after some commands
-set scrolloff=3        " Keep three lines below the last line when scrolling
+set scrolloff=5        " Keep three lines below the last line when scrolling
+set sidescroll=1       " Sidescrolling more natural
 set gdefault           " this makes search/replace global by default
 set switchbuf=useopen  " Switch to an existing buffer if one exists
 
@@ -172,7 +173,7 @@ set t_vb=
 " Mouse
 " ---------------
 set mousehide  " Hide mouse after chars typed
-" set mouse=a    " Mouse in all modes
+set mouse=     " Disable mouse
 
 " Better complete options to speed it up
 set complete=.,w,b,u,U
