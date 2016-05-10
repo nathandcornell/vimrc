@@ -1,7 +1,7 @@
 " ----------
-" Vundle
+" Dein
 " ----------
-" Settings required for Vundle:
+" Settings required for Dein (package mgmt):
 set nocompatible
 filetype off
 set runtimepath^=~/.vim/other/repos/github.com/Shougo/dein.vim
@@ -11,11 +11,21 @@ call dein#begin(expand('~/.vim/other'))
 call dein#add('Shougo/dein.vim')
 
 call dein#add('Raimondi/delimitMate')
-call dein#add('StanAngeloff/php.vim')
+call dein#add('Shougo/deoplete.nvim')
+call dein#add('Shougo/vimproc.vim', {
+\   'build': {
+\     'windows': 'tools\\update-dll-mingw',
+\     'cygwin': 'make -f make_cygwin.mak',
+\     'mac': 'make -f make_mac.mak',
+\     'linux': 'make',
+\     'unix': 'gmake',
+\   },
+\ })
+" call dein#add('StanAngeloff/php.vim')
 call dein#add('bling/vim-airline')
 call dein#add('cakebaker/scss-syntax.vim')
 call dein#add('cespare/vim-sbd')
-call dein#add('ervandew/supertab')
+" call dein#add('ervandew/supertab')
 call dein#add('fatih/vim-go')
 call dein#add('fholgado/minibufexpl.vim')
 call dein#add('gregsexton/gitv')
@@ -24,6 +34,7 @@ call dein#add('indenthtml.vim')
 call dein#add('jistr/vim-nerdtree-tabs')
 call dein#add('joonty/vim-phpqa.git')
 call dein#add('kien/rainbow_parentheses.vim')
+call dein#add('m2mdas/phpcomplete-extended')
 call dein#add('mxw/vim-jsx')
 call dein#add('othree/html5.vim')
 call dein#add('pangloss/vim-javascript')
@@ -34,6 +45,7 @@ call dein#add('tpope/vim-surround')
 call dein#end()
 
 filetype plugin indent on
+" set omnifunc=syntaxcomplete#Complete
 
 " ---------------
 " Color
@@ -103,9 +115,10 @@ set timeoutlen=450     " Time to wait for a command (after leader for example).
 set foldlevelstart=2
 set foldmethod=indent
 set formatoptions=crql
-set iskeyword+=\$,-   " Add extra characters that are valid parts of variables
+set iskeyword+=\$,-    " Add extra characters that are valid parts of variables
 set nostartofline      " Don't go to the start of the line after some commands
-set scrolloff=3        " Keep three lines below the last line when scrolling
+set scrolloff=5        " Keep five lines below the last line when scrolling
+set sidescroll=1       " Single character side scrolling
 set gdefault           " this makes search/replace global by default
 set switchbuf=useopen  " Switch to an existing buffer if one exists
 
@@ -174,7 +187,7 @@ set t_vb=
 " Mouse
 " ---------------
 set mousehide  " Hide mouse after chars typed
-" set mouse=a    " Mouse in all modes
+set mouse=     " No mouse
 
 " Better complete options to speed it up
 set complete=.,w,b,u,U
@@ -270,3 +283,11 @@ let delimitMate_expand_space = 1
 " --------------------
 nnoremap <silent> <leader>qq :Sbd<CR>
 nnoremap <silent> <leader>QQ :Sbdm<CR>
+
+" ---------------------
+" DeoPlete
+" ---------------------
+let g:deoplete#enable_at_startup = 1
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete
+autocmd FileType js setlocal omnifunc=javascriptcomplete
