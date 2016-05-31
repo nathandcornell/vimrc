@@ -117,8 +117,8 @@ set foldmethod=indent
 set formatoptions=crql
 set iskeyword+=\$,-    " Add extra characters that are valid parts of variables
 set nostartofline      " Don't go to the start of the line after some commands
-set scrolloff=5        " Keep five lines below the last line when scrolling
-set sidescroll=1       " Single character side scrolling
+set scrolloff=5        " Keep three lines below the last line when scrolling
+set sidescroll=1       " Sidescrolling more natural
 set gdefault           " this makes search/replace global by default
 set switchbuf=useopen  " Switch to an existing buffer if one exists
 
@@ -187,7 +187,7 @@ set t_vb=
 " Mouse
 " ---------------
 set mousehide  " Hide mouse after chars typed
-set mouse=     " No mouse
+set mouse=     " Disable mouse
 
 " Better complete options to speed it up
 set complete=.,w,b,u,U
@@ -239,7 +239,7 @@ nnoremap <leader>mm :enew<CR>
 " ---------------
 " NERDTree
 " ---------------
-nnoremap <leader>nn :NERDTreeTabsToggle<CR>
+nnoremap <leader>nn :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
 let g:NERDTreeShowBookmarks = 1
 let g:NERDTreeChDirMode = 1
@@ -249,7 +249,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")
   \&& b:NERDTreeType == "primary") | q | endif
 " Start NERDTree on startup
 if ! &diff
-  autocmd VimEnter * NERDTreeTabsOpen
+  autocmd VimEnter * NERDTreeOpen
 endif
 autocmd VimEnter * execute "normal \<c-w>w"
 
