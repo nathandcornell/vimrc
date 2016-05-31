@@ -4,3 +4,5 @@
 /.tmp/*
 .VimballRecord
 init.vim 
+.init.vim-rplugin~
+other/*

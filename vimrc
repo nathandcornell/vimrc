@@ -225,7 +225,7 @@ nnoremap <leader>mm :enew<CR>
 " ---------------
 " NERDTree
 " ---------------
-nnoremap <leader>nn :NERDTreeTabsToggle<CR>
+nnoremap <leader>nn :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
 let g:NERDTreeShowBookmarks = 1
 let g:NERDTreeChDirMode = 1
@@ -235,7 +235,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")
   \&& b:NERDTreeType == "primary") | q | endif
 " Start NERDTree on startup
 if ! &diff
-  autocmd VimEnter * NERDTreeTabsOpen
+  autocmd VimEnter * NERDTreeOpen
 endif
 autocmd VimEnter * execute "normal \<c-w>w"
 
