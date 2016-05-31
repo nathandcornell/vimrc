@@ -235,7 +235,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")
   \&& b:NERDTreeType == "primary") | q | endif
 " Start NERDTree on startup
 if ! &diff
-  autocmd VimEnter * NERDTreeOpen
+  autocmd VimEnter * NERDTree
 endif
 autocmd VimEnter * execute "normal \<c-w>w"
 
