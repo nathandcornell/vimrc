@@ -28,6 +28,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/Align'
 
 call vundle#end()
 
