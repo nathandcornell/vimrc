@@ -21,7 +21,7 @@ call dein#add('Shougo/vimproc.vim', {
 \     'unix': 'gmake',
 \   },
 \ })
-" call dein#add('StanAngeloff/php.vim')
+call dein#add('StanAngeloff/php.vim')
 call dein#add('bling/vim-airline')
 call dein#add('cakebaker/scss-syntax.vim')
 call dein#add('cespare/vim-sbd')
