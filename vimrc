@@ -12,19 +12,13 @@ call dein#add('Shougo/dein.vim')
 
 call dein#add('Raimondi/delimitMate')
 call dein#add('Shougo/deoplete.nvim')
-call dein#add('Shougo/vimproc.vim', {
-\   'build': {
-\     'windows': 'tools\\update-dll-mingw',
-\     'cygwin': 'make -f make_cygwin.mak',
-\     'mac': 'make -f make_mac.mak',
-\     'linux': 'make',
-\     'unix': 'gmake',
-\   },
-\ })
+call dein#add('Shougo/vimproc.vim', { 'build' : 'make' })
+
 call dein#add('StanAngeloff/php.vim')
 call dein#add('bling/vim-airline')
 call dein#add('cakebaker/scss-syntax.vim')
 call dein#add('cespare/vim-sbd')
+" call dein#add('derekwyatt/vim-scala')
 " call dein#add('ervandew/supertab')
 call dein#add('fatih/vim-go')
 call dein#add('fholgado/minibufexpl.vim')
@@ -34,18 +28,42 @@ call dein#add('indenthtml.vim')
 call dein#add('jistr/vim-nerdtree-tabs')
 call dein#add('joonty/vim-phpqa.git')
 call dein#add('kien/rainbow_parentheses.vim')
-call dein#add('m2mdas/phpcomplete-extended')
+" call dein#add('lambdatoast/elm.vim')
+" call dein#add('m2mdas/phpcomplete-extended')
+call dein#add('mattn/emmet-vim.git')
 call dein#add('mxw/vim-jsx')
 call dein#add('othree/html5.vim')
 call dein#add('pangloss/vim-javascript')
 call dein#add('scrooloose/nerdtree')
+call dein#add('sheerun/vim-polyglot')
+call dein#add('Shougo/unite.vim')
+call dein#add('tpope/vim-endwise')
+call dein#add('tpope/vim-haml')
 call dein#add('tpope/vim-fugitive')
+call dein#add('tpope/vim-rails')
 call dein#add('tpope/vim-surround')
+call dein#add('vim-ruby/vim-ruby')
+call dein#add('vim-scripts/Align')
+call dein#add('vimwiki/vimwiki')
+call dein#add('wincent/command-t', {
+\   'build_commands': ['make', 'ruby'],
+\   'build': {
+\     'unix': 'cd ruby/command-t && { make clean; ruby extconf.rb && make }',
+\     'mac':  'cd ruby/command-t && { make clean; ruby extconf.rb && make }',
+\   },
+\ })
+
 
 call dein#end()
 
 filetype plugin indent on
 " set omnifunc=syntaxcomplete#Complete
+
+" ----------------
+" Python support
+" ----------------
+let g:python2_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 " ---------------
 " Color
@@ -291,3 +309,8 @@ let g:deoplete#enable_at_startup = 1
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete
 autocmd FileType js setlocal omnifunc=javascriptcomplete
+
+" ----------------------
+" PHPComplete
+" ----------------------
+let g:phpcomplete_index_composer_command = '/usr/local/bin/composer'
