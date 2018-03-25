@@ -1,38 +1,64 @@
-" ----------
-" Vundle
-" ----------
-" Settings required for Vundle:
 set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 
-" Plugins (Vundle must be first)
-Plugin 'VundleVim/Vundle.vim'
+" ---------
+" vim-plug
+" ---------
+call plug#begin('~/.vim/vimplug-plugins')
 
-Plugin 'Raimondi/delimitMate'
-Plugin 'StanAngeloff/php.vim'
-Plugin 'bling/vim-airline'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'cespare/vim-sbd'
-Plugin 'ervandew/supertab'
-Plugin 'fholgado/minibufexpl.vim'
-Plugin 'gregsexton/gitv'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'indenthtml.vim'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'joonty/vim-phpqa.git'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'othree/html5.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-scripts/Align'
+Plug 'Raimondi/delimitMate'
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/vimproc.vim', { 'build' : 'make' }
 
-call vundle#end()
+Plug 'StanAngeloff/php.vim'
+Plug 'bling/vim-airline'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'cespare/vim-sbd'
+Plug 'fatih/vim-go'
+Plug 'fholgado/minibufexpl.vim'
+Plug 'gregsexton/gitv'
+Plug 'honza/vim-snippets'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'joonty/vim-phpqa.git'
+Plug 'mattn/emmet-vim.git'
+Plug 'mxw/vim-jsx'
+Plug 'nvie/vim-flake8'
+Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'scrooloose/nerdtree'
+Plug 'sheerun/vim-polyglot'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/unite.vim'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-surround'
+Plug 'vim-ruby/vim-ruby'
+Plug 'vim-scripts/Align'
+Plug 'vim-scripts/indenthtml.vim'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'vimwiki/vimwiki'
+Plug 'Yggdroot/indentLine'
+Plug 'wincent/command-t', {
+\   'build_commands': ['make', 'ruby'],
+\   'build': {
+\     'unix': 'cd ruby/command-t && { make clean; ruby extconf.rb && make }',
+\     'mac':  'cd ruby/command-t && { make clean; ruby extconf.rb && make }',
+\   },
+\ }
 
-filetype plugin indent on
+call plug#end()
+" --------------
+" end vim-plug
+" --------------
+
+" ----------------
+" Python support
+" ----------------
+let g:python_host_prog  = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 " ---------------
 " Color
@@ -67,7 +93,7 @@ endif
 " ---------------
 set ruler          " Ruler on
 set number         " Line numbers on
-set relativenumber " Relative Line numbers on
+" set relativenumber " Relative Line numbers on
 set nowrap         " Line wrapping off
 set laststatus=2   " Always show the statusline
 set cmdheight=2    " Make the command area two lines high
@@ -75,7 +101,7 @@ set encoding=utf-8
 set noshowmode     " Don't show the mode since Powerline shows it
 set title          " Set the title of the window in the terminal to the file
 if exists('+colorcolumn')
-set colorcolumn=100 " Color the 80th column differently as a wrapping guide.
+set colorcolumn=80 " Color the 80th column differently as a wrapping guide.
 endif
 " Disable tooltips for hovering keywords in Vim
 if exists('+ballooneval')
@@ -113,8 +139,9 @@ set switchbuf=useopen  " Switch to an existing buffer if one exists
 " Text Format
 " ---------------
 set tabstop=2
-set backspace=indent,eol,start " Delete everything with backspace
 set shiftwidth=2 " Tabs under smart indent
+set softtabstop=2
+set backspace=indent,eol,start " Delete everything with backspace
 set cindent
 set autoindent
 set smarttab
@@ -218,10 +245,19 @@ nnoremap <leader>vv :set paste!<CR>
 "new empty tab
 nnoremap <leader>mm :enew<CR>
 
+vnoremap // y/<C-R>"<CR>
 
 " ----------------
 " Plugin settings
 " ----------------
+"
+" ---------------
+" Lexma
+" ---------------
+let g:lexima_enable_basic_rules = 1
+" let g:lexima_enable_endwise_rules = 1
+let g:lexima_enable_newline_rules = 1
+
 
 " ---------------
 " NERDTree
@@ -235,9 +271,9 @@ let g:NERDTreeMinimalUI = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")
   \&& b:NERDTreeType == "primary") | q | endif
 " Start NERDTree on startup
-if ! &diff
-  autocmd VimEnter * NERDTree
-endif
+" if ! &diff
+"   autocmd VimEnter * if &filetype !=# 'vimwiki' | NERDTree | endif
+" endif
 autocmd VimEnter * execute "normal \<c-w>w"
 
 " ---------------
@@ -252,12 +288,6 @@ nnoremap <leader>os :OpenSession<CR>
 " ---------
 let g:phpqa_codesniffer_autorun = 0
 let g:phpqa_messdetector_autorun = 0
-
-" --------------------
-" Rainbow_parentheses
-" --------------------
-autocmd VimEnter * RainbowParenthesesToggle
-autocmd Syntax * RainbowParenthesesLoadBraces
 
 " --------------------
 " DelimitMate

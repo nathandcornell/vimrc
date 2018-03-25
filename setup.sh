@@ -10,13 +10,19 @@ if [ ! -d ~/.vim/.undo ]; then
   mkdir ~/.vim/.undo
 fi
 
+if [ ! -d ~/.vim/vimplug-plugins ]; then
+  mkdir ~/.vim/vimplug-plugins
+fi
+
 if [ -d ~/.vim/bundle/Vundle.vim ]; then
   rm -rf ~/.vim/bundle/Vundle.vim
 fi
 
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+# git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-vim +PluginInstall +qall
+vim +PlugInstall +qall
 
 if [ ! -f ~/.vimrc ]; then
   ln -s ~/.vim/vimrc ~/.vimrc

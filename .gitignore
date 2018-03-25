@@ -2,6 +2,7 @@
 /.backup/*
 /.undo/*
 /.tmp/*
+/vimplug-plugins/*
 .VimballRecord
 init.vim 
 .init.vim-rplugin~
