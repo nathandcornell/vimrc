@@ -6,7 +6,14 @@ set nocompatible
 call plug#begin('~/.vim/vimplug-plugins')
 
 Plug 'Raimondi/delimitMate'
-Plug 'Shougo/deoplete.nvim'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 Plug 'Shougo/vimproc.vim', { 'build' : 'make' }
 
 Plug 'StanAngeloff/php.vim'
@@ -48,6 +55,7 @@ Plug 'wincent/command-t', {
 \     'mac':  'cd ruby/command-t && { make clean; ruby extconf.rb && make }',
 \   },
 \ }
+Plug 'zchee/deoplete-jedi'
 
 call plug#end()
 " --------------
@@ -300,3 +308,27 @@ let delimitMate_expand_space = 1
 " --------------------
 nnoremap <silent> <leader>qq :Sbd<CR>
 nnoremap <silent> <leader>QQ :Sbdm<CR>
+
+" --------------------
+" deoplete
+" --------------------
+let g:deoplete#enable_at_startup = 1
+"use <tab> for completion
+function! TabWrap()
+    if pumvisible()
+        return "\<C-N>"
+    elseif strpart( getline('.'), 0, col('.') - 1 ) =~ '^\s*$'
+        return "\<tab>"
+    elseif &omnifunc !~ ''
+        return "\<C-X>\<C-O>"
+    else
+        return "\<C-N>"
+    endif
+endfunction
+
+" power tab
+imap <silent><expr><tab> TabWrap()
+
+" Enter: complete&close popup if visible (so next Enter works); else: break undo
+inoremap <silent><expr> <Cr> pumvisible() ?
+            \ deoplete#mappings#close_popup() : "<C-g>u<Cr>"
