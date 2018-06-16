@@ -329,6 +329,6 @@ endfunction
 " power tab
 imap <silent><expr><tab> TabWrap()
 
-" Enter: complete&close popup if visible (so next Enter works); else: break undo
-inoremap <silent><expr> <Cr> pumvisible() ?
-            \ deoplete#mappings#close_popup() : "<C-g>u<Cr>"
+" " Enter: complete&close popup if visible (so next Enter works); else: break undo
+" inoremap <silent><expr> <Cr> pumvisible() ?
+"             \ deoplete#mappings#close_popup() : "<C-g>u<Cr>"
