@@ -16,15 +16,19 @@ endif
 let g:deoplete#enable_at_startup = 1
 Plug 'Shougo/vimproc.vim', { 'build' : 'make' }
 
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/unite.vim'
 Plug 'StanAngeloff/php.vim'
-Plug 'bling/vim-airline'
+Plug 'Yggdroot/indentLine'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'cespare/vim-sbd'
 Plug 'fatih/vim-go'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'gregsexton/gitv'
-Plug 'honza/vim-snippets'
 Plug 'hail2u/vim-css3-syntax'
+Plug 'honza/vim-snippets'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'joonty/vim-phpqa.git'
 Plug 'mattn/emmet-vim.git'
@@ -34,20 +38,19 @@ Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/unite.vim'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-haml'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-haml'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/Align'
 Plug 'vim-scripts/indenthtml.vim'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'vimwiki/vimwiki'
-Plug 'Yggdroot/indentLine'
+Plug 'w0rp/ale'
 Plug 'wincent/command-t', {
 \   'build_commands': ['make', 'ruby'],
 \   'build': {
@@ -77,10 +80,11 @@ if $TERM =~ "-256color"
 endif
 set t_Co=256
 colorscheme jellybeans
-if has ("gui_running")
-    autocmd!
-    autocmd GUIEnter * colorscheme jellybeans
+if $LIGHT_TERMINAL == 1
+    set background=light
+    colorscheme PaperColor
 else
+    set background=dark
     colorscheme n8colors
 endif
 
@@ -109,7 +113,7 @@ set encoding=utf-8
 set noshowmode     " Don't show the mode since Powerline shows it
 set title          " Set the title of the window in the terminal to the file
 if exists('+colorcolumn')
-set colorcolumn=80 " Color the 80th column differently as a wrapping guide.
+  set colorcolumn=80 " Color the 80th column differently as a wrapping guide.
 endif
 " Disable tooltips for hovering keywords in Vim
 if exists('+ballooneval')
@@ -133,7 +137,7 @@ set cf                 " Enable error files & error jumping.
 set clipboard+=unnamed " Yanks go on clipboard instead.
 set autowrite          " Writes on make/shell commands
 set timeoutlen=450     " Time to wait for a command (after leader for example).
-set foldlevelstart=2
+set foldlevelstart=4
 set foldmethod=indent
 set formatoptions=crql
 set iskeyword+=\$,-    " Add extra characters that are valid parts of variables
@@ -154,13 +158,6 @@ set cindent
 set autoindent
 set smarttab
 set expandtab
-" match NearLength /\%.\{96,100}/
-
-set colorcolumn=80 " Color the 80th column differently as a wrapping guide.
-
-" match NearLength /\%<80v.\%>75v/
-" 2match OverLength /\%<86v.\%>80v/
-" 2match OverLength /\%101v.*/
 
 " ---------------
 " Searching
@@ -231,6 +228,10 @@ let maplocalleader = "\\"
 nnoremap ; :
 vnoremap ; :
 
+" Quickly open/reload vimrc
+nnoremap <leader>ev :split $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
 " let's make escape better, together.
 inoremap jk <esc>
 inoremap jK <esc>
@@ -246,19 +247,16 @@ nnoremap <silent> gl :wincmd l<CR>
 nnoremap <silent> gn :bn<CR>
 nnoremap <silent> gb :bp<CR>
 
-" paste mode shortcut
-inoremap <silent> <leader>v  <esc>:set paste!<CR> i
-nnoremap <leader>vv :set paste!<CR>
-
 "new empty tab
 nnoremap <leader>mm :enew<CR>
 
 vnoremap // y/<C-R>"<CR>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ----------------
 " Plugin settings
 " ----------------
-"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---------------
 " Lexma
 " ---------------
@@ -298,6 +296,13 @@ let g:phpqa_codesniffer_autorun = 0
 let g:phpqa_messdetector_autorun = 0
 
 " --------------------
+" Rainbow_parentheses
+" --------------------
+" autocmd VimEnter * RainbowParenthesesToggle
+" autocmd Syntax * RainbowParenthesesLoadBraces
+let g:rainbow_active = 1
+
+" --------------------
 " DelimitMate
 " --------------------
 let delimitMate_expand_cr = 1
@@ -310,7 +315,7 @@ nnoremap <silent> <leader>qq :Sbd<CR>
 nnoremap <silent> <leader>QQ :Sbdm<CR>
 
 " --------------------
-" deoplete
+" DeoPlete
 " --------------------
 let g:deoplete#enable_at_startup = 1
 "use <tab> for completion
@@ -326,9 +331,63 @@ function! TabWrap()
     endif
 endfunction
 
-" power tab
-imap <silent><expr><tab> TabWrap()
+function! EnterWrap()
+  if pumvisible()
+    return deoplete#mappings#close_popup()
+  else
+    <C-g>u<Cr>"
+endfunction
 
-" " Enter: complete&close popup if visible (so next Enter works); else: break undo
-" inoremap <silent><expr> <Cr> pumvisible() ?
-"             \ deoplete#mappings#close_popup() : "<C-g>u<Cr>"
+" power tab
+imap <silent><expr><TAB> TabWrap()
+
+" Enter: complete&close popup if visible (so next Enter works); else: break undo
+imap <silent><expr><Cr> EnterWrap()
+
+" Ctrl K to exand/jump neosnippets
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/vimplug-plugins/honza/vim-snippets/snippets/'
+
+" ----------------------
+" PHPComplete
+" ----------------------
+let g:phpcomplete_index_composer_command = '/usr/local/bin/composer'
+
+" ----------------------
+" Ale
+" ----------------------
+let g:ale_completion_enabled = 1
+let g:ale_lint_on_save = 1
+let g:ale_fix_on_save = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_linters = {
+\   'ruby': ['rubocop', 'trim_whitespace'],
+\   'haml': ['rubocop', 'trim_whitespace'],
+\   'css': ['scss-lint', 'trim_whitespace'],
+\   'scss': ['scss-lint', 'trim_whitespace'],
+\   'js': ['eslint --no-ignore'],
+\   'jsx': ['eslint --no-ignore']
+\}
+let g:ale_fixers = {
+\   'ruby': ['rubocop', 'trim_whitespace']
+\}
+
+" ---------------
+"  vim-jsx
+" ---------------
+let g:jsx_ext_required = 0 " Allow jsx highlighting in .js files
+
+" ---------------
+"  fzf + ripgrep
+" ---------------
+set rtp+=/usr/local/opt/fzf
+
+nnoremap <C-p> :FZF <CR>
