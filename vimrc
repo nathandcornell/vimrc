@@ -15,27 +15,28 @@ call dein#add('Shougo/deoplete.nvim')
 call dein#add('Shougo/vimproc.vim', { 'build' : 'make' })
 
 call dein#add('StanAngeloff/php.vim')
-call dein#add('bling/vim-airline')
+call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline-themes')
 call dein#add('cakebaker/scss-syntax.vim')
 call dein#add('cespare/vim-sbd')
-" call dein#add('derekwyatt/vim-scala')
-" call dein#add('ervandew/supertab')
 call dein#add('fatih/vim-go')
 call dein#add('fholgado/minibufexpl.vim')
 call dein#add('gregsexton/gitv')
+call dein#add('honza/vim-snippets')
 call dein#add('hail2u/vim-css3-syntax')
-call dein#add('indenthtml.vim')
 call dein#add('jistr/vim-nerdtree-tabs')
 call dein#add('joonty/vim-phpqa.git')
-call dein#add('kien/rainbow_parentheses.vim')
-" call dein#add('lambdatoast/elm.vim')
 " call dein#add('m2mdas/phpcomplete-extended')
 call dein#add('mattn/emmet-vim.git')
 call dein#add('mxw/vim-jsx')
+call dein#add('NLKNguyen/papercolor-theme')
+call dein#add('nvie/vim-flake8')
 call dein#add('othree/html5.vim')
 call dein#add('pangloss/vim-javascript')
 call dein#add('scrooloose/nerdtree')
 call dein#add('sheerun/vim-polyglot')
+call dein#add('Shougo/neosnippet')
+call dein#add('Shougo/neosnippet-snippets')
 call dein#add('Shougo/unite.vim')
 call dein#add('tpope/vim-endwise')
 call dein#add('tpope/vim-haml')
@@ -44,7 +45,11 @@ call dein#add('tpope/vim-rails')
 call dein#add('tpope/vim-surround')
 call dein#add('vim-ruby/vim-ruby')
 call dein#add('vim-scripts/Align')
+call dein#add('vim-scripts/indenthtml.vim')
+call dein#add('vim-scripts/indentpython.vim')
 call dein#add('vimwiki/vimwiki')
+call dein#add('w0rp/ale')
+call dein#add('Yggdroot/indentLine')
 call dein#add('wincent/command-t', {
 \   'build_commands': ['make', 'ruby'],
 \   'build': {
@@ -62,7 +67,7 @@ filetype plugin indent on
 " ----------------
 " Python support
 " ----------------
-let g:python2_host_prog = '/usr/local/bin/python'
+let g:python_host_prog  = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
 " ---------------
@@ -74,10 +79,11 @@ if $TERM =~ "-256color"
 endif
 set t_Co=256
 colorscheme jellybeans
-if has ("gui_running")
-    autocmd!
-    autocmd GUIEnter * colorscheme jellybeans
+if $LIGHT_TERMINAL == 1
+    set background=light
+    colorscheme PaperColor
 else
+    set background=dark
     colorscheme n8colors
 endif
 
@@ -98,7 +104,7 @@ endif
 " ---------------
 set ruler          " Ruler on
 set number         " Line numbers on
-set relativenumber " Relative Line numbers on
+" set relativenumber " Relative Line numbers on
 set nowrap         " Line wrapping off
 set laststatus=2   " Always show the statusline
 set cmdheight=2    " Make the command area two lines high
@@ -106,7 +112,7 @@ set encoding=utf-8
 set noshowmode     " Don't show the mode since Powerline shows it
 set title          " Set the title of the window in the terminal to the file
 if exists('+colorcolumn')
-set colorcolumn=100 " Color the 80th column differently as a wrapping guide.
+  set colorcolumn=80 " Color the 80th column differently as a wrapping guide.
 endif
 " Disable tooltips for hovering keywords in Vim
 if exists('+ballooneval')
@@ -130,7 +136,7 @@ set cf                 " Enable error files & error jumping.
 set clipboard+=unnamed " Yanks go on clipboard instead.
 set autowrite          " Writes on make/shell commands
 set timeoutlen=450     " Time to wait for a command (after leader for example).
-set foldlevelstart=2
+set foldlevelstart=4
 set foldmethod=indent
 set formatoptions=crql
 set iskeyword+=\$,-    " Add extra characters that are valid parts of variables
@@ -144,19 +150,14 @@ set switchbuf=useopen  " Switch to an existing buffer if one exists
 " Text Format
 " ---------------
 set tabstop=2
-set backspace=indent,eol,start " Delete everything with backspace
 set shiftwidth=2 " Tabs under smart indent
+set softtabstop=2
+set backspace=indent,eol,start " Delete everything with backspace
 set cindent
 set autoindent
 set smarttab
 set expandtab
-" match NearLength /\%.\{96,100}/
-
 set colorcolumn=80 " Color the 80th column differently as a wrapping guide.
-
-" match NearLength /\%<80v.\%>75v/
-" 2match OverLength /\%<86v.\%>80v/
-" 2match OverLength /\%101v.*/
 
 " ---------------
 " Searching
@@ -227,6 +228,10 @@ let maplocalleader = "\\"
 nnoremap ; :
 vnoremap ; :
 
+" Quickly open/reload vimrc
+nnoremap <leader>ev :split $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
 " let's make escape better, together.
 inoremap jk <esc>
 inoremap jK <esc>
@@ -242,17 +247,25 @@ nnoremap <silent> gl :wincmd l<CR>
 nnoremap <silent> gn :bn<CR>
 nnoremap <silent> gb :bp<CR>
 
-" paste mode shortcut
-inoremap <silent> <leader>v  <esc>:set paste!<CR> i
-nnoremap <leader>vv :set paste!<CR>
+" " paste mode shortcut
+" inoremap <silent> <leader>v  <esc>:set paste!<CR> i
+" nnoremap <leader>vv :set paste!<CR>
 
 "new empty tab
 nnoremap <leader>mm :enew<CR>
 
+vnoremap // y/<C-R>"<CR>
 
 " ----------------
 " Plugin settings
 " ----------------
+
+" ---------------
+" Lexma
+" ---------------
+let g:lexima_enable_basic_rules = 1
+" let g:lexima_enable_endwise_rules = 1
+let g:lexima_enable_newline_rules = 1
 
 " ---------------
 " NERDTree
@@ -266,9 +279,9 @@ let g:NERDTreeMinimalUI = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")
   \&& b:NERDTreeType == "primary") | q | endif
 " Start NERDTree on startup
-if ! &diff
-  autocmd VimEnter * NERDTree
-endif
+" if ! &diff
+"   autocmd VimEnter * if &filetype !=# 'vimwiki' | NERDTree | endif
+" endif
 autocmd VimEnter * execute "normal \<c-w>w"
 
 " ---------------
@@ -287,8 +300,9 @@ let g:phpqa_messdetector_autorun = 0
 " --------------------
 " Rainbow_parentheses
 " --------------------
-autocmd VimEnter * RainbowParenthesesToggle
-autocmd Syntax * RainbowParenthesesLoadBraces
+" autocmd VimEnter * RainbowParenthesesToggle
+" autocmd Syntax * RainbowParenthesesLoadBraces
+let g:rainbow_active = 1
 
 " --------------------
 " DelimitMate
@@ -311,6 +325,58 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete
 autocmd FileType js setlocal omnifunc=javascriptcomplete
 
 " ----------------------
+"  Neosnippet
+" ----------------------
+imap <expr><TAB>
+ \ pumvisible() ? "\<C-n>" :
+ \ neosnippet#expandable_or_jumpable() ?
+ \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/other/repos/github.com/honza/vim-snippets/snippets/'
+
+" ----------------------
 " PHPComplete
 " ----------------------
 let g:phpcomplete_index_composer_command = '/usr/local/bin/composer'
+
+" ----------------------
+" Ale 
+" ----------------------
+let g:ale_completion_enabled = 1
+let g:ale_lint_on_save = 1
+let g:ale_fix_on_save = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_linters = {
+\   'ruby': ['rubocop', 'trim_whitespace'],
+\   'haml': ['rubocop', 'trim_whitespace'],
+\   'css': ['scss-lint', 'trim_whitespace'],
+\   'scss': ['scss-lint', 'trim_whitespace'],
+\   'js': ['eslint --no-ignore'],
+\   'jsx': ['eslint --no-ignore']
+\}
+let g:ale_fixers = {
+\   'ruby': ['rubocop', 'trim_whitespace']
+\}
+
+" ---------------
+"  vim-jsx
+" ---------------
+let g:jsx_ext_required = 0 " Allow jsx highlighting in .js files
+
+" ---------------
+"  fzf + ripgrep
+" ---------------
+set rtp+=/usr/local/opt/fzf
+
+nnoremap <C-p> :FZF <CR>
+
+" ---------------
+"  Airline
+" ---------------

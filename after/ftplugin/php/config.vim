@@ -1,7 +1,7 @@
 set colorcolumn=100 " Color the 80th column differently as a wrapping guide.
-match NearLength /\%<100v.\%>95v/
-2match OverLength /\%<106v.\%>100v/
 autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
+let php_sql_query = 1
+let php_htmlInStrings = 1
 
 set ts=4
 set sw=4

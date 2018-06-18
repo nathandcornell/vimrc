@@ -28,3 +28,5 @@ else
   mv ~/.vimrc ~/.vimrc.old
   ln -s ~/.vim/vimrc ~/.vimrc
 fi
+
+which nvim && ln -s ~/.vim/vimrc ~/.config/nvim/init.vim
