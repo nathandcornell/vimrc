@@ -24,14 +24,15 @@ Plug 'StanAngeloff/php.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'cespare/vim-sbd'
+Plug 'dyng/ctrlsf.vim'
 Plug 'fatih/vim-go'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'gregsexton/gitv'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'honza/vim-snippets'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'joonty/vim-phpqa.git'
-Plug 'mattn/emmet-vim.git'
+Plug 'joonty/vim-phpqa'
+Plug 'mattn/emmet-vim'
 Plug 'mxw/vim-jsx'
 Plug 'nvie/vim-flake8'
 Plug 'othree/html5.vim'
@@ -391,3 +392,9 @@ let g:jsx_ext_required = 0 " Allow jsx highlighting in .js files
 set rtp+=/usr/local/opt/fzf
 
 nnoremap <C-p> :FZF <CR>
+
+" ----------------
+"  CtrlSF
+" ----------------
+vmap <C-F>f <Plug>CtrlSFVwordExec
+nmap <C-F>f <Plug>CtrlSFCwordPath
