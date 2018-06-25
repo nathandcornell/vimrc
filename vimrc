@@ -397,4 +397,5 @@ nnoremap <C-p> :FZF <CR>
 "  CtrlSF
 " ----------------
 vmap <C-F>f <Plug>CtrlSFVwordExec
-nmap <C-F>f <Plug>CtrlSFCwordPath
+nmap <C-F>f <Plug>CtrlSFCwordExec
+nmap <C-F>/ <Plug>CtrlSFPwordPath
