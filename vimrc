@@ -283,13 +283,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")
 " endif
 autocmd VimEnter * execute "normal \<c-w>w"
 
-" ---------------
-" Session
-" ---------------
-let g:session_autosave = 0
-let g:session_autoload = 0
-nnoremap <leader>os :OpenSession<CR>
-
 " ---------
 " phpqa
 " ---------
