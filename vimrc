@@ -13,28 +13,33 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-let g:deoplete#enable_at_startup = 1
-Plug 'Shougo/vimproc.vim', { 'build' : 'make' }
+Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
 
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/neosnippet'
+" Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/unite.vim'
-Plug 'StanAngeloff/php.vim'
+" Plug 'StanAngeloff/php.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'cespare/vim-sbd'
+" Plug 'codegram/vim-codereview'
 Plug 'dyng/ctrlsf.vim'
-Plug 'fatih/vim-go'
+" Plug 'fatih/vim-go'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'gregsexton/gitv'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'honza/vim-snippets'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'joonty/vim-phpqa'
-Plug 'mattn/emmet-vim'
+" Plug 'joonty/vim-phpqa'
+" Plug 'junkblocker/patchreview-vim'
+" Plug 'mattn/emmet-vim'
 Plug 'mxw/vim-jsx'
-Plug 'nvie/vim-flake8'
+" Plug 'nvie/vim-flake8'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'scrooloose/nerdtree'
@@ -59,7 +64,7 @@ Plug 'wincent/command-t', {
 \     'mac':  'cd ruby/command-t && { make clean; ruby extconf.rb && make }',
 \   },
 \ }
-Plug 'zchee/deoplete-jedi'
+" Plug 'zchee/deoplete-jedi'
 
 call plug#end()
 " --------------
@@ -286,8 +291,8 @@ autocmd VimEnter * execute "normal \<c-w>w"
 " ---------
 " phpqa
 " ---------
-let g:phpqa_codesniffer_autorun = 0
-let g:phpqa_messdetector_autorun = 0
+" let g:phpqa_codesniffer_autorun = 0
+" let g:phpqa_messdetector_autorun = 0
 
 " --------------------
 " Rainbow_parentheses
@@ -309,7 +314,7 @@ nnoremap <silent> <leader>qq :Sbd<CR>
 nnoremap <silent> <leader>QQ :Sbdm<CR>
 
 " --------------------
-" DeoPlete
+" Deoplete
 " --------------------
 let g:deoplete#enable_at_startup = 1
 "use <tab> for completion
@@ -352,7 +357,7 @@ let g:neosnippet#snippets_directory='~/.vim/vimplug-plugins/honza/vim-snippets/s
 " ----------------------
 " PHPComplete
 " ----------------------
-let g:phpcomplete_index_composer_command = '/usr/local/bin/composer'
+" let g:phpcomplete_index_composer_command = '/usr/local/bin/composer'
 
 " ----------------------
 " Ale
@@ -368,10 +373,13 @@ let g:ale_linters = {
 \   'css': ['scss-lint', 'trim_whitespace'],
 \   'scss': ['scss-lint', 'trim_whitespace'],
 \   'js': ['eslint --no-ignore'],
-\   'jsx': ['eslint --no-ignore']
+\   'jsx': ['eslint --no-ignore'],
+\   'python': ['python-language-server']
 \}
 let g:ale_fixers = {
-\   'ruby': ['rubocop', 'trim_whitespace']
+\   'ruby': ['rubocop', 'trim_whitespace'],
+\   'js': ['eslint'],
+\   'jsx': ['eslint']
 \}
 
 " ---------------
@@ -392,3 +400,23 @@ nnoremap <C-p> :FZF <CR>
 vmap <C-F>f <Plug>CtrlSFVwordExec
 nmap <C-F>f <Plug>CtrlSFCwordExec
 nmap <C-F>/ <Plug>CtrlSFPwordPath
+
+" ----------------
+"  vim-codereview
+" ----------------
+nnoremap <silent> <leader>C :CodeReviewCommentChange<CR>
+
+" -----------------------
+"  LanguageClient-neovim
+" -----------------------
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+" Language Servers:
+let g:LanguageClient_serverCommands = {
+\  'python': ['/usr/local/bin/python-language-server']
+\}
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
