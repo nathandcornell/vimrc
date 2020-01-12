@@ -412,9 +412,12 @@ nnoremap <silent> <leader>C :CodeReviewCommentChange<CR>
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
+let g:LanguageClient_autoStart = 1
+
 " Language Servers:
 let g:LanguageClient_serverCommands = {
-\  'python': ['/usr/local/bin/python-language-server']
+\  'python': ['/usr/local/bin/python-language-server'],
+\  'rust': ['rustup', 'run', 'nightly', 'rls'],
 \}
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>

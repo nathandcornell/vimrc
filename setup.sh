@@ -1,32 +1,24 @@
-if [ ! -d ~/.vim/.backup ]; then
-  mkdir ~/.vim/.backup
+if [ ! -d $HOME/.vim/.backup ]; then
+  mkdir $HOME/.vim/.backup
 fi
 
-if [ ! -d ~/.vim/.tmp ]; then
-  mkdir ~/.vim/.tmp
+if [ ! -d $HOME/.vim/.tmp ]; then
+  mkdir $HOME/.vim/.tmp
 fi
 
-if [ ! -d ~/.vim/.undo ]; then
-  mkdir ~/.vim/.undo
+if [ ! -d $HOME/.vim/.undo ]; then
+  mkdir $HOME/.vim/.undo
 fi
 
-if [ ! -d ~/.vim/vimplug-plugins ]; then
-  mkdir ~/.vim/vimplug-plugins
+if [ ! -d $HOME/.vim/vimplug-plugins ]; then
+  mkdir $HOME/.vim/vimplug-plugins
 fi
 
-if [ -d ~/.vim/bundle/Vundle.vim ]; then
-  rm -rf ~/.vim/bundle/Vundle.vim
+if [ -d $HOME/.vim/bundle/Vundle.vim ]; then
+  rm -rf $HOME/.vim/bundle/Vundle.vim
 fi
 
-# git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 vim +PlugInstall +qall
-
-if [ ! -f ~/.vimrc ]; then
-  ln -s ~/.vim/vimrc ~/.vimrc
-else
-  mv ~/.vimrc ~/.vimrc.old
-  ln -s ~/.vim/vimrc ~/.vimrc
-fi
