@@ -16,32 +16,32 @@ endif
 Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
 
 Plug 'NLKNguyen/papercolor-theme'
-" Plug 'Shougo/neosnippet'
-" Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/unite.vim'
-" Plug 'StanAngeloff/php.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+Plug 'ayu-theme/ayu-vim'
+Plug 'bling/vim-bufferline'
+Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1', 'for': 'python' }
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'cespare/vim-sbd'
-" Plug 'codegram/vim-codereview'
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'dyng/ctrlsf.vim'
-" Plug 'fatih/vim-go'
-Plug 'fholgado/minibufexpl.vim'
 Plug 'gregsexton/gitv'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'honza/vim-snippets'
 Plug 'jistr/vim-nerdtree-tabs'
-" Plug 'joonty/vim-phpqa'
-" Plug 'junkblocker/patchreview-vim'
-" Plug 'mattn/emmet-vim'
+Plug 'jaredgorski/spacecamp'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'lambdalisue/vim-pyenv', {'for': 'python'}
+Plug 'lucasprag/simpleblack'
 Plug 'mxw/vim-jsx'
-" Plug 'nvie/vim-flake8'
+Plug 'nathandcornell/onehalf', {'rtp': 'vim/'}
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-endwise'
@@ -54,7 +54,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/Align'
 Plug 'vim-scripts/indenthtml.vim'
-Plug 'vim-scripts/indentpython.vim'
+Plug 'vim-scripts/indentpython.vim', {'for': 'python'}
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 Plug 'wincent/command-t', {
@@ -80,19 +80,59 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 " ---------------
 " Color
 " ---------------
-" Force 256 color mode if available
-if $TERM =~ "-256color"
-    set t_Co=256
+"" Force 256 color mode if available
+" if $TERM =~ "-256color"
+"     set t_Co=256
+" endif
+" set t_Co=256
+
+" Truecolors!
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
 endif
-set t_Co=256
-colorscheme jellybeans
+
+"" one-half colorscheme:
+" if $LIGHT_TERMINAL == 1
+"   colorscheme onehalflight
+"   let g:airline_theme="onehalflight"
+" else
+"   colorscheme onehalfdark
+"   let g:airline_theme="onehalfdark"
+" endif
+
+"" ayu colorscheme:
+" if $LIGHT_TERMINAL == 1
+"   let ayucolor="light"
+" else
+"   let ayucolor="dark"
+" endif
+" colorscheme ayu
+
+"" SimpleBlack colorscheme:
+" if $LIGHT_TERMINAL == 1
+"   let ayucolor="light"
+"   colorscheme ayu
+" else
+"   colorscheme simpleblack
+" endif
+
+"" SimpleBlack colorscheme:
 if $LIGHT_TERMINAL == 1
-    set background=light
-    colorscheme PaperColor
+  let ayucolor="light"
+  colorscheme ayu
 else
-    set background=dark
-    colorscheme n8colors
+  colorscheme spacecamp
 endif
+
+"" Lucius colorscheme:
+" if $LIGHT_TERMINAL == 1
+"   LuciusWhite
+" else
+"   LuciusBlack
+" endif
+" colorscheme lucius
 
 " -----------------------------
 " File Locations
@@ -372,14 +412,17 @@ let g:ale_linters = {
 \   'haml': ['rubocop', 'trim_whitespace'],
 \   'css': ['scss-lint', 'trim_whitespace'],
 \   'scss': ['scss-lint', 'trim_whitespace'],
-\   'js': ['eslint --no-ignore'],
-\   'jsx': ['eslint --no-ignore'],
-\   'python': ['python-language-server']
+\   'javascript': ['eslint', 'tsserver', 'trim_whitespace'],
+\   'javascriptreact': ['eslint', 'tsserver', 'trim_whitespace'],
+\   'typescript': ['eslint', 'tsserver', 'trim_whitespace'],
+\   'typescriptreact': ['eslint', 'tsserver', 'trim_whitespace'],
+\   'python': ['pyls']
 \}
 let g:ale_fixers = {
-\   'ruby': ['rubocop', 'trim_whitespace'],
-\   'js': ['eslint'],
-\   'jsx': ['eslint']
+\   'javascript': ['eslint', 'trim_whitespace'],
+\   'javascriptreact': ['eslint', 'trim_whitespace'],
+\   'typescript': ['eslint', 'trim_whitespace'],
+\   'typescriptreact': ['eslint', 'trim_whitespace']
 \}
 
 " ---------------
@@ -414,9 +457,18 @@ set hidden
 
 " Language Servers:
 let g:LanguageClient_serverCommands = {
-\  'python': ['/usr/local/bin/python-language-server']
+\  'python': ['pyls'],
+\  'rust': ['rustup', 'run', 'nightly', 'rls']
 \}
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+" -----------------------
+"  vim-airline
+" -----------------------
+let g:airline#extensions#tabline#enabled = 1
+" let g:airline_statusline_ontop = 1
+" let g:airline_powerline_fonts = 1
+let g:airline_theme = "base16_spacemacs"

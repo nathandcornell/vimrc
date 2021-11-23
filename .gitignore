@@ -7,3 +7,5 @@
 init.vim 
 .init.vim-rplugin~
 other/*
+black/*
+*.old
