@@ -1,3 +1,10 @@
+pip install msgpack
+pip install python-language-server
+pip3 install --user pynvim
+
+npm install -g typescript-language-server
+npm install -g eslint
+
 if [ ! -d ~/.vim/.backup ]; then
   mkdir ~/.vim/.backup
 fi
