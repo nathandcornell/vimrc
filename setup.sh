@@ -1,5 +1,5 @@
-pip install msgpack
-pip install python-language-server
+pip3 install msgpack
+pip3 install python-language-server
 pip3 install --user pynvim
 
 npm install -g typescript-language-server
