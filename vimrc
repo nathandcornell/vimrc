@@ -3,14 +3,14 @@ let g:vim_home = get(g:, 'vim_home', expand('~/.vim/'))
 
 " Load plugins (via VimPlug):
 exec 'source' vim_home . 'config/plugins.vim'
-" Plugin Settings
-exec 'source' vim_home . 'config/plugins/config.vim'
 " UI and colorscheme settings:
 exec 'source' vim_home . 'config/ui.vim'
 " Behavioral settings:
 exec 'source' vim_home . 'config/behavior.vim'
 " Keymappings
 exec 'source' vim_home . 'config/mappings.vim'
+" Plugin Settings
+exec 'source' vim_home . 'config/plugins/config.vim'
 
 " ----------------
 "  Python support

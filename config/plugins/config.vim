@@ -50,3 +50,10 @@ nnoremap <silent> <leader>C :CodeReviewCommentChange<CR>
 " -----------------------
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = "base16_spacemacs"
+
+" ---------
+"  Copilot
+" ---------
+let g:copilot_enabled=0
+nnoremap <silent> <leader>ce :Copilot enable<CR>
+nnoremap <silent> <leader>cd :Copilot disable<CR>

@@ -3,6 +3,7 @@
 " ---------
 call plug#begin('~/.vim/vimplug-plugins')
 Plug 'cespare/vim-sbd'
+Plug 'github/copilot.vim'
 Plug 'jaredgorski/spacecamp'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -27,7 +28,6 @@ Plug 'vim-scripts/Align'
 " Plug 'cespare/vim-toml' " TOML file syntax"
 " Plug 'davidhalter/jedi-vim', {'for': 'python'}
 " Plug 'dyng/ctrlsf.vim'
-" Plug 'github/copilot.vim'
 " Plug 'gregsexton/gitv'
 " Plug 'hail2u/vim-css3-syntax'
 " Plug 'honza/vim-snippets'
