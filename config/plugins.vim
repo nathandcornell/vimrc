@@ -2,6 +2,7 @@
 " vim-plug
 " ---------
 call plug#begin('~/.vim/vimplug-plugins')
+Plug 'Yggdroot/indentLine'
 Plug 'cespare/vim-sbd'
 Plug 'github/copilot.vim'
 Plug 'jaredgorski/spacecamp'
@@ -22,7 +23,6 @@ Plug 'vim-scripts/Align'
 "  Temporarily Disabled
 " ----------------------
 " Plug 'Raimondi/delimitMate'
-" Plug 'Yggdroot/indentLine'
 " Plug 'bling/vim-bufferline'
 " Plug 'cakebaker/scss-syntax.vim'
 " Plug 'cespare/vim-toml' " TOML file syntax"

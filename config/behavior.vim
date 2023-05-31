@@ -31,10 +31,10 @@ set tabstop=2                  " 2 spaces per tab
 set shiftwidth=2               " 2 Tabs under smart indent
 set softtabstop=2              " 2 insert 2 spaces after tab
 set backspace=indent,eol,start " Delete everything with backspace
+set cindent                    " 'smart' C-style indenting
 set autoindent                 " Maintain indentation on new lines
 set smarttab                   " Delete tabstop # of spaces when deleting
 set expandtab                  " Insert spaces instead of tab characters
-set cindent                    " 'smart' C-style indenting
 
 " ---------------
 " Searching
