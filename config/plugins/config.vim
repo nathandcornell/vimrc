@@ -3,7 +3,6 @@ exec 'source' vim_home . 'config/plugins/coc.vim'
 " NerdTree
 exec 'source' vim_home . 'config/plugins/nerdtree.vim'
 
-
 " --------
 "  Lexma
 " --------

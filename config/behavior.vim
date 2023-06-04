@@ -1,9 +1,8 @@
-" ---------------
-" Behaviors
-" ---------------
+" -----------
+"  Behaviors
+" -----------
 set backup             " Turn on backups
 set autoread           " Automatically reload changes if detected
-set wildmenu           " Turn on WiLd menu
 set hidden             " Change buffer - without saving
 set history=768        " Number of things to remember in history.
 set cf                 " Enable error files & error jumping.
@@ -24,9 +23,9 @@ set switchbuf=useopen  " Switch to an existing buffer if one exists
 set foldmethod=indent  " Fold on indentations
 set foldlevelstart=4   " Automatically fold anything over 4 indentations
 
-" ---------------
-" Text Format
-" ---------------
+" -------------
+"  Text Format
+" -------------
 set tabstop=2                  " 2 spaces per tab
 set shiftwidth=2               " 2 Tabs under smart indent
 set softtabstop=2              " 2 insert 2 spaces after tab
@@ -36,10 +35,17 @@ set autoindent                 " Maintain indentation on new lines
 set smarttab                   " Delete tabstop # of spaces when deleting
 set expandtab                  " Insert spaces instead of tab characters
 
-" ---------------
-" Searching
-" ---------------
+" -----------
+"  Searching
+" -----------
 set incsearch  " Incremental search
+
+" --------------
+"  File Finding
+" --------------
+" (:find and :b)
+set path+=**   " Search all subfolders and files
+set wildmenu   " Show all possible matches with tab navigation
 
 " ------------
 "  Completion

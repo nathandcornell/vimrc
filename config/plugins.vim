@@ -2,6 +2,7 @@
 " vim-plug
 " ---------
 call plug#begin('~/.vim/vimplug-plugins')
+Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'cespare/vim-sbd'
 Plug 'github/copilot.vim'
@@ -14,6 +15,7 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'rhysd/vim-wasm' " WAsm support
 Plug 'rust-lang/rust.vim' " Rust support
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -22,7 +24,6 @@ Plug 'vim-scripts/Align'
 " ----------------------
 "  Temporarily Disabled
 " ----------------------
-" Plug 'Raimondi/delimitMate'
 " Plug 'bling/vim-bufferline'
 " Plug 'cakebaker/scss-syntax.vim'
 " Plug 'cespare/vim-toml' " TOML file syntax"
@@ -39,7 +40,6 @@ Plug 'vim-scripts/Align'
 " Plug 'othree/html5.vim'
 " Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1', 'for': 'python' }
 " Plug 'sheerun/vim-polyglot'
-" Plug 'tpope/vim-endwise'
 " Plug 'tpope/vim-fugitive'
 " Plug 'tpope/vim-haml'
 " Plug 'tpope/vim-rails'
