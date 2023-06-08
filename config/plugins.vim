@@ -16,6 +16,7 @@ Plug 'rhysd/vim-wasm' " WAsm support
 Plug 'rust-lang/rust.vim' " Rust support
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -40,7 +41,6 @@ Plug 'vim-scripts/Align'
 " Plug 'othree/html5.vim'
 " Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1', 'for': 'python' }
 " Plug 'sheerun/vim-polyglot'
-" Plug 'tpope/vim-fugitive'
 " Plug 'tpope/vim-haml'
 " Plug 'tpope/vim-rails'
 " Plug 'vim-ruby/vim-ruby'
