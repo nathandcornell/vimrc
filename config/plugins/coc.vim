@@ -1,7 +1,11 @@
 set updatetime=300
 set signcolumn=yes
 
+" Enable airline integration
 let g:airline#extensions#coc#enabled = 1
+
+" Extensions:
+let g:coc_global_extensions = ['coc-json', 'coc-tsserver']
 
 " Select the first option with enter:
 inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
