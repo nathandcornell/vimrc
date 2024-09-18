@@ -9,6 +9,7 @@ Plug 'github/copilot.vim'
 Plug 'jaredgorski/spacecamp'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'jparise/vim-graphql'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'peitalin/vim-jsx-typescript'
